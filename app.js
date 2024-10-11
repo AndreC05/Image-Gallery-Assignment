@@ -1,5 +1,6 @@
 const backgroundImage = document.getElementById("backgroundImage");
 const thumbnailGroup = document.getElementById("thumbnailGroup");
+let foucusIndex = 0;
 
 const images = [
   {
@@ -35,11 +36,20 @@ for (let index = 0; index < images.length; index++) {
   img.src = images[index].src;
   img.alt = images[index].alt;
   img.title = images[index].title;
+  img.tabIndex = "1";
 
   img.addEventListener("click", function () {
     backgroundImage.src = images[index].src;
     backgroundImage.alt = images[index].alt;
     backgroundImage.title = images[index].title;
+  });
+
+  img.addEventListener("keydown", function (event) {
+    if (event.key === " " || event.key === "Enter") {
+      backgroundImage.src = images[index].src;
+      backgroundImage.alt = images[index].alt;
+      backgroundImage.title = images[index].title;
+    }
   });
 
   thumbnailGroup.appendChild(img);
