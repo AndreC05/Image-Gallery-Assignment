@@ -21,7 +21,12 @@
       </div>
       <img
         id="backgroundImage"
-        src="./assets/moonDay.jpg"
+        srcset="
+          ./assets/moonDay_1200x1800.jpg 1200w,
+          ./assets/taxi_800x1000.jpg      800w,
+          ./assets/fish_450x676.jpg       450w
+        "
+        sizes="(max-width: 600px) 450w, (max-width: 1000px) 800w, 1200w"
         alt="Starting background image"
         title="Probably a nice image"
       />
@@ -31,6 +36,3 @@
     </footer>
   </body>
 </html>
-
-<!-- srcset="./assets/moonDay.jpg 4391w, ./assets/taxi_800x1000.jpg 800w"
-sizes="(max-width: 850px) 800w, 4391w" -->

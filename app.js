@@ -3,27 +3,37 @@ const thumbnailGroup = document.getElementById("thumbnailGroup");
 
 const images = [
   {
-    src: "./assets/dayForest.jpg",
+    srcset:
+      "./assets/dayForest_1200x1800.jpg 1200w, ./assets/dayForest_800x1199.jpg 800w, ./assets/dayForest_450x675.jpg 450w",
+    sizes: "(max-width: 600px) 450px, (max-width: 1000px) 800px, 1200px",
     alt: "forest during the day",
     title: "Day Forest",
   },
   {
-    src: "./assets/nightForest.jpg",
+    srcset:
+      "./assets/nightForest_1200x800.jpg 1200w, ./assets/nightForest_800x533.jpg 800w, ./assets/nightForest_450x300.jpg 450w",
+    sizes: "(max-width: 600px) 450w, (max-width: 1000px) 800w, 1200w",
     alt: "forest during the night",
     title: "Night Forest",
   },
   {
-    src: "./assets/taxi.jpg",
+    srcset:
+      "./assets/taxi_1200x1500.jpg 1200w, ./assets/taxi_800x1000.jpg 800w, ./assets/taxi_450x563.jpg 450w",
+    sizes: "(max-width: 600px) 450w, (max-width: 1000px) 800w, 1200w",
     alt: "taxi",
     title: "Taxi",
   },
   {
-    src: "./assets/fish.jpg",
+    srcset:
+      "./assets/fish_1200x1801.jpg 1200w, ./assets/fish_800x1200.jpg 800w, ./assets/fish_450x676.jpg 450w",
+    sizes: "(max-width: 600px) 450w, (max-width: 1000px) 800w, 1200w",
     alt: "blue fish",
     title: "Nice Fish",
   },
   {
-    src: "./assets/moonDay.jpg",
+    srcset:
+      "./assets/moonDay_1200x1800.jpg 1200w, ./assets/moonDay_800x1200.jpg 800w, ./assets/moonDay_450x675.jpg 450w",
+    sizes: "(max-width: 600px) 450w, (max-width: 1000px) 800w, 1200w",
     alt: "beach with the moon on the sky",
     title: "Beach Moon",
   },
@@ -33,7 +43,7 @@ for (let index = 0; index < images.length; index++) {
   const img = document.createElement("img");
   let targetIndex = 0;
 
-  img.src = images[index].src;
+  img.srcset = images[index].srcset;
   img.alt = images[index].alt;
   img.title = images[index].title;
   img.tabIndex = "1";
@@ -41,14 +51,14 @@ for (let index = 0; index < images.length; index++) {
   img.setAttribute("focusIndex", index);
 
   img.addEventListener("click", function () {
-    backgroundImage.src = images[index].src;
+    backgroundImage.srcset = images[index].srcset;
     backgroundImage.alt = images[index].alt;
     backgroundImage.title = images[index].title;
   });
 
   img.addEventListener("keydown", function (event) {
     if (event.key == " " || event.key == "Enter") {
-      backgroundImage.src = images[index].src;
+      backgroundImage.srcset = images[index].srcset;
       backgroundImage.alt = images[index].alt;
       backgroundImage.title = images[index].title;
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
