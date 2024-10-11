@@ -5,7 +5,7 @@ const images = [
   {
     srcset:
       "./assets/dayForest_1200x1800.jpg 1200w, ./assets/dayForest_800x1199.jpg 800w, ./assets/dayForest_450x675.jpg 450w",
-    sizes: "(max-width: 600px) 450px, (max-width: 1000px) 800px, 1200px",
+    sizes: "(max-width: 600px) 450w, (max-width: 1000px) 800w, 1200w",
     alt: "forest during the day",
     title: "Day Forest",
   },
@@ -49,11 +49,13 @@ for (let index = 0; index < images.length; index++) {
   img.tabIndex = "1";
   img.focusIndex = index;
   img.setAttribute("focusIndex", index);
+  img.setAttribute("aria-selected", "false");
 
   img.addEventListener("click", function () {
     backgroundImage.srcset = images[index].srcset;
     backgroundImage.alt = images[index].alt;
     backgroundImage.title = images[index].title;
+    updateAriaSelected(index);
   });
 
   img.addEventListener("keydown", function (event) {
@@ -61,7 +63,7 @@ for (let index = 0; index < images.length; index++) {
       backgroundImage.srcset = images[index].srcset;
       backgroundImage.alt = images[index].alt;
       backgroundImage.title = images[index].title;
-      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////Move Target Right//////////////////////////////////////////////////////////////////////////
     } else if (event.key == "ArrowRight") {
       if (img.focusIndex + 1 < images.length) {
         targetIndex = img.focusIndex + 1;
@@ -73,8 +75,9 @@ for (let index = 0; index < images.length; index++) {
         `img[focusIndex="${targetIndex}"]`
       );
       newFocusTarget.focus();
+      updateAriaSelected(targetIndex);
 
-      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////Move Target Left//////////////////////////////////////////////////////////////////////////
     } else if (event.key == "ArrowLeft") {
       if (img.focusIndex - 1 >= 0) {
         targetIndex = img.focusIndex - 1;
@@ -86,8 +89,22 @@ for (let index = 0; index < images.length; index++) {
         `img[focusIndex="${targetIndex}"]`
       );
       newFocusTarget.focus();
+      updateAriaSelected(targetIndex);
     }
   });
 
   thumbnailGroup.appendChild(img);
+}
+
+function updateAriaSelected(imageIndex) {
+  document.querySelectorAll("img[aria-selected]").forEach(function (img) {
+    img.setAttribute("aria-selected", "false");
+    console.log();
+  });
+
+  const imageToSelect = document.querySelector(
+    `img[focusIndex="${imageIndex}"]`
+  );
+  imageToSelect.setAttribute("aria-selected", "true");
+  backgroundImage.setAttribute("aria-live", "assertive");
 }
